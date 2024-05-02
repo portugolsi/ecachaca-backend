@@ -28,10 +28,19 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework_simplejwt',
     'main',
-     'corsheaders',
+    'corsheaders',
 ]
 
+
+AUTH_USER_MODEL = "main.Usuario"
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}       
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -41,8 +50,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    
-    
 ]
 
 
@@ -55,7 +62,6 @@ CORS_ALLOWED_ORIGINS = [
     'exp://localhost:8081',
     'http://192.168.0.12:8081',
     'https://192.168.0.12:8081',
-    
 ]
 
 ROOT_URLCONF = 'project.urls'

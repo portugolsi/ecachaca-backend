@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from main.api.serializers import ProdutoSerializer,AvaliacaoSerializer,CategoriaSerializer,ProdutorSerializer,QtdCliquesSerializer
-from main.models import Produto,Avaliacao,Produtor,QtdCliques,Categoria
+from main.api.serializers import ProdutoSerializer,AvaliacaoSerializer,CategoriaSerializer,ProdutorSerializer,QtdCliquesSerializer,UsuarioSerializer
+from main.models import Produto,Avaliacao,Produtor,QtdCliques,Categoria,Usuario
 
 class ProdutoViewset(viewsets.ModelViewSet):
     serializer_class = ProdutoSerializer
@@ -25,6 +25,10 @@ class ProdutoViewset(viewsets.ModelViewSet):
                 queryset = queryset.select_related(field)
 
         return queryset
+
+class UsuarioViewset(viewsets.ModelViewSet):
+    serializer_class = UsuarioSerializer
+    queryset = Usuario.objects.all()
 
 class AvaliacaoViewset(viewsets.ModelViewSet):
     serializer_class = AvaliacaoSerializer
