@@ -22,15 +22,17 @@ class Usuario(AbstractBaseUser, PermissionsMixin):
         return self.email
 
 class Avaliacao(models.Model):
-    usuario = models.ForeignKey(Usuario,on_delete=models.CASCADE)
+    usuario = models.ForeignKey(Usuario, on_delete=models.CASCADE)
+    produto = models.ForeignKey(Produto, on_delete=models.CASCADE)
     criada_em = models.DateTimeField(auto_now_add=True)
     atualizada_em = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.usuario.username
-    class Meta: #Definindo o nome da classe no plural
+        return f"{self.usuario.username} - {self.produto.nome}"
+    
+    class Meta: # Definindo o nome da classe no plural
         verbose_name_plural = "Avaliações"
-
+        unique_together = ('usuario', 'produto')
 class Produtor(models.Model):
     nome = models.CharField(max_length=100)
     foto = models.ImageField(upload_to='FotosProdutores',null=True,blank=True)
